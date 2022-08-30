@@ -4,14 +4,14 @@ import styled from 'styled-components/macro';
 import {
   MAIN_STORY,
   OPINION_STORIES,
-  SECONDARY_STORIES,
+  SECONDARY_STORIES
 } from '../../data';
 
-import SectionTitle from '../SectionTitle';
-import MainStory from '../MainStory';
-import SecondaryStory from '../SecondaryStory';
-import OpinionStory from '../OpinionStory';
 import Advertisement from '../Advertisement';
+import MainStory from '../MainStory';
+import OpinionStory from '../OpinionStory';
+import SecondaryStory from '../SecondaryStory';
+import SectionTitle from '../SectionTitle';
 
 const MainStoryGrid = () => {
   return (
@@ -23,7 +23,9 @@ const MainStoryGrid = () => {
       <SecondaryStorySection>
         <StoryList>
           {SECONDARY_STORIES.map((story, index) => (
-            <SecondaryStory key={story.id} {...story} />
+            <VerticalStoryWrapper key={story.id}>
+              <SecondaryStory {...story} />
+            </VerticalStoryWrapper>
           ))}
         </StoryList>
       </SecondaryStorySection>
@@ -32,7 +34,9 @@ const MainStoryGrid = () => {
         <SectionTitle>Opinion</SectionTitle>
         <StoryList>
           {OPINION_STORIES.map((story, index) => (
-            <OpinionStory key={story.id} {...story} />
+            <VerticalStoryWrapper key={story.id}>
+              <OpinionStory {...story} />
+            </VerticalStoryWrapper>
           ))}
         </StoryList>
       </OpinionSection>
@@ -67,6 +71,14 @@ const StoryList = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+const VerticalStoryWrapper = styled.div`
+  &:not(:last-of-type) {
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-gray-300);
+    margin-bottom: 16px;
+  }
+`
 
 const OpinionSection = styled.section`
   grid-area: opinion-stories;
